@@ -1,0 +1,54 @@
+name: Build and deploy Italian verb site
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+  schedule:
+    # Runs daily at 05:17 UTC. Change this if you want less frequent updates.
+    - cron: "17 5 * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build JSON data from Google Sheet
+        env:
+          SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL || vars.SHEET_CSV_URL }}
+        run: python scripts/build_data.py
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
