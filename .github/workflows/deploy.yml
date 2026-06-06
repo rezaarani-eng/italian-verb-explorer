@@ -5,7 +5,6 @@ on:
     branches: ["main"]
   workflow_dispatch:
   schedule:
-    # Runs daily at 05:17 UTC. Change this if you want less frequent updates.
     - cron: "*/5 * * * *"
 
 permissions:
