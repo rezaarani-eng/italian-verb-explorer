@@ -32,10 +32,16 @@ jobs:
       - name: Build JSON data from Google Sheet
         env:
           SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL || vars.SHEET_CSV_URL }}
+          THIRD_BLOCK_MOOD: ${{ vars.THIRD_BLOCK_MOOD }}
+          THIRD_BLOCK_TENSE: ${{ vars.THIRD_BLOCK_TENSE }}
+          FOURTH_BLOCK_MOOD: ${{ vars.FOURTH_BLOCK_MOOD }}
+          FOURTH_BLOCK_TENSE: ${{ vars.FOURTH_BLOCK_TENSE }}
         run: python scripts/build_data.py
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
