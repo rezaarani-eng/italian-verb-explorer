@@ -19,10 +19,10 @@ const targetTabs = [
     match: form => isMood(form, "indicativo") && isTense(form, "futuro semplice")
   },
   {
-    id: "futuro-anteriore",
-    label: "Futuro anteriore",
-    description: "Future perfect examples, once they exist in your sheet.",
-    match: form => isTense(form, "futuro anteriore")
+    id: "condizionale-semplice",
+    label: "Condizionale semplice",
+    description: "Conditional examples for polite requests, wishes, and hypothetical situations.",
+    match: form => isMood(form, "condizionale") && isTense(form, "condizionale semplice")
   },
   {
     id: "congiuntivo",
