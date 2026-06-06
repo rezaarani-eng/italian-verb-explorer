@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   schedule:
     # Runs daily at 05:17 UTC. Change this if you want less frequent updates.
-    - cron: "17 5 * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: read
