@@ -3,97 +3,108 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Italian Verb Conjugation Explorer</title>
-  <meta name="description" content="Search Italian verbs and study 24 conjugated example sentences with English translations." />
+  <title>Italian Verb Atlas</title>
+  <meta name="description" content="A beautiful Italian verb explorer with searchable conjugation cards, translations, and tense tabs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="bg-orb orb-a"></div>
-  <div class="bg-orb orb-b"></div>
-  <div class="bg-orb orb-c"></div>
+  <div class="aurora aurora-one"></div>
+  <div class="aurora aurora-two"></div>
+  <div class="aurora aurora-three"></div>
+  <div class="grain" aria-hidden="true"></div>
 
-  <header class="hero">
-    <nav class="topbar" aria-label="Top navigation">
-      <div class="brand">
-        <span class="brand-mark">it</span>
-        <span>Coniuga</span>
+  <header class="site-header">
+    <nav class="nav" aria-label="Top navigation">
+      <a class="logo" href="#top" aria-label="Italian Verb Atlas home">
+        <span class="logo-mark">IT</span>
+        <span>
+          <strong>Verb Atlas</strong>
+          <small>Italian conjugations</small>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="#explorer">Explorer</a>
+        <a href="#how-it-works">How it works</a>
       </div>
-      <a class="ghost-link" href="#how-it-works">How it works</a>
     </nav>
 
-    <section class="hero-grid">
-      <div>
-        <p class="eyebrow">Italian verb study tool</p>
-        <h1>Search one verb. See every sentence, tense, and translation.</h1>
+    <section id="top" class="hero-card">
+      <div class="hero-copy">
+        <p class="eyebrow">Your personal Italian conjugation gallery</p>
+        <h1>Search a verb. Glide through every tense.</h1>
         <p class="subtitle">
-          Type any verb from the google sheet.
-          The site instantly opens 24 cards: six people across four tense/mood groups (presente, futuro semplice, condizionale semplice, congiuntivo).
+          Type <strong>abbracciare</strong> or any verb from your sheet. The page opens polished study cards with the Italian form, example sentence, and English translation.
         </p>
 
         <form class="search-shell" id="searchForm">
+          <span class="search-icon" aria-hidden="true">⌕</span>
           <label class="sr-only" for="verbSearch">Search a verb</label>
-          <input id="verbSearch" autocomplete="off" placeholder="Try abbracciare, mentire, ricorrere…" />
-          <button type="submit">Search</button>
+          <input id="verbSearch" autocomplete="off" placeholder="Try abbracciare, prevedere, mentire…" />
+          <button type="submit">Explore</button>
         </form>
 
         <div class="chips" id="suggestionChips" aria-label="Suggested verbs"></div>
       </div>
 
-      <aside class="stat-panel" aria-label="Dataset summary">
-        <div class="stat">
-          <span id="verbCount">—</span>
-          <small>verbs</small>
+      <aside class="hero-visual" aria-label="Conjugation preview">
+        <div class="floating-card card-one">
+          <span>io</span>
+          <strong>abbraccio</strong>
+          <small>I hug / embrace</small>
         </div>
-        <div class="stat">
-          <span>24</span>
-          <small>forms per verb</small>
+        <div class="floating-card card-two">
+          <span>noi</span>
+          <strong>abbracceremo</strong>
+          <small>we will embrace</small>
         </div>
-        <div class="stat">
-          <span>4</span>
-          <small>tense / mood groups</small>
+        <div class="stat-ring">
+          <b id="verbCount">—</b>
+          <span>verbs</span>
         </div>
       </aside>
     </section>
   </header>
 
-  <main>
-    <section class="results-layout">
-      <aside class="match-panel">
-        <div class="panel-heading">
-          <p class="eyebrow">Matches</p>
-          <h2>Verb index</h2>
-        </div>
-        <div id="matchList" class="match-list"></div>
-      </aside>
-
-      <section id="verbPanel" class="verb-panel" aria-live="polite"></section>
-    </section>
-
-    <section id="how-it-works" class="how">
-      <p class="eyebrow">Simple architecture</p>
-      <h2>Google Sheet → Python → JSON → GitHub Pages</h2>
-      <div class="how-grid">
-        <article>
-          <span>1</span>
-          <h3>Publish your sheet</h3>
-          <p>Publish the clean verb tab as CSV so GitHub can read the latest version.</p>
-        </article>
-        <article>
-          <span>2</span>
-          <h3>Python converts it</h3>
-          <p>The build script reshapes your rows into a compact <code>verbs.json</code> file.</p>
-        </article>
-        <article>
-          <span>3</span>
-          <h3>The website searches instantly</h3>
-          <p>GitHub Pages serves the static files for free, and JavaScript handles the search UI.</p>
-        </article>
+  <main id="explorer" class="app-shell">
+    <aside class="sidebar" aria-label="Verb matches">
+      <div class="sidebar-head">
+        <p class="eyebrow">Matches</p>
+        <h2>Verb index</h2>
+        <p>Choose a verb or keep typing to narrow the list.</p>
       </div>
-    </section>
+      <div id="matchList" class="match-list"></div>
+    </aside>
+
+    <section id="verbPanel" class="verb-panel" aria-live="polite"></section>
   </main>
 
-  <footer>
-    <p>Made for serious Italian practice — accurate data in, beautiful study cards out.</p>
+  <section id="how-it-works" class="how-card">
+    <p class="eyebrow">Simple, free, shareable</p>
+    <h2>Google Sheet → Python → JSON → GitHub Pages</h2>
+    <div class="how-grid">
+      <article>
+        <span>01</span>
+        <h3>Publish the clean sheet</h3>
+        <p>Your Google Sheet becomes a public CSV that GitHub can read.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Python shapes the data</h3>
+        <p>The build script converts the table into a searchable <code>verbs.json</code>.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>The front end feels instant</h3>
+        <p>GitHub Pages hosts the beautiful static site for you and your friend.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Built for serious Italian practice, but designed to feel delightful.</p>
     <p id="generatedAt"></p>
   </footer>
 

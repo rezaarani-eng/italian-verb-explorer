@@ -60,11 +60,19 @@ def extract_focus_form(sentence: str, tense: str) -> str:
 
     return tokens[start]
 
+# The first two blocks are fixed by the starter sheet layout.
+# The third and fourth blocks can be relabeled with GitHub Actions variables
+# if you later replace Condizionale with Futuro anteriore in your Google Sheet.
+THIRD_BLOCK_MOOD = os.environ.get("THIRD_BLOCK_MOOD") or "Condizionale"
+THIRD_BLOCK_TENSE = os.environ.get("THIRD_BLOCK_TENSE") or "Condizionale semplice"
+FOURTH_BLOCK_MOOD = os.environ.get("FOURTH_BLOCK_MOOD") or "Congiuntivo"
+FOURTH_BLOCK_TENSE = os.environ.get("FOURTH_BLOCK_TENSE") or "Congiuntivo presente"
+
 TENSE_BLOCKS = [
     ("Indicativo", "Presente", 0, 1, 6),
     ("Indicativo", "Futuro semplice", 0, 7, 12),
-    ("Condizionale", "Condizionale semplice", 2, 1, 6),
-    ("Congiuntivo", "Congiuntivo presente", 2, 7, 12),
+    (THIRD_BLOCK_MOOD, THIRD_BLOCK_TENSE, 2, 1, 6),
+    (FOURTH_BLOCK_MOOD, FOURTH_BLOCK_TENSE, 2, 7, 12),
 ]
 
 ROOT = Path(__file__).resolve().parents[1]
