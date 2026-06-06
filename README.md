@@ -1,94 +1,45 @@
-# Italian Verb Conjugation Explorer
+# Italian Verb Explorer
 
-A free, static website for searching your Italian verb spreadsheet.
+A clean, shareable GitHub Pages website for studying Italian verbs from your Google Sheet.
 
-Type a verb such as `abbracciare`, and the site shows 24 cards:
+## What this version includes
 
-- 6 people in **Presente**
-- 6 people in **Futuro semplice**
-- 6 people in **Condizionale semplice**
-- 6 people in **Congiuntivo presente**
+- Cleaner premium front end
+- Stable layout that does not collapse into default blue links
+- Search by verb, meaning, Italian sentence, or English translation
+- Four main tabs:
+  - Presente
+  - Futuro semplice
+  - Futuro anteriore
+  - Congiuntivo
+- Smooth scrolling from each tab to its section
+- Extra section for forms in your current sheet that are not one of the four requested tabs, such as Condizionale semplice
+- Copy-all button for a selected verb
+- Mobile-friendly design
 
-Each card shows the extracted conjugated form, the full Italian sentence, and the English translation.
+## Important note about Futuro anteriore
 
-## Folder structure
+Your current spreadsheet data has Condizionale semplice, not Futuro anteriore. The Futuro anteriore tab is visible and ready, but it will show an empty-state message until your sheet includes Futuro anteriore rows.
 
-```text
-site/
-  index.html
-  styles.css
-  app.js
-  data/verbs.json
-scripts/
-  build_data.py
-.github/workflows/
-  deploy.yml
-```
-
-## Fastest way to try it locally
-
-Open `site/index.html` in your browser.
-
-Some browsers block local JSON loading from `file://`. If that happens, run this from the project folder:
-
-```bash
-python -m http.server 8000 -d site
-```
-
-Then open:
+If you later replace the third block in your sheet with Futuro anteriore, add these GitHub Actions variables:
 
 ```text
-http://localhost:8000
+THIRD_BLOCK_MOOD = Indicativo
+THIRD_BLOCK_TENSE = Futuro anteriore
 ```
 
-## Connect it to your Google Sheet
+Then rerun the GitHub Action.
 
-GitHub Pages is static hosting, so Python is used in the GitHub Actions build step, not on each visitor request. The browser loads `verbs.json` and searches it instantly.
+## Updating GitHub
 
-1. Upload your workbook to Google Sheets.
-2. Keep the clean verb table in one tab using the same layout:
-   - Column A has the numbered verb, such as `34 - abbracciare`.
-   - Columns B:G contain 6 forms for one group.
-   - Columns H:M contain 6 forms for the next group.
-   - Each verb uses 4 rows: Italian examples, English translations, Italian examples, English translations.
-3. In Google Sheets, choose **File → Share → Publish to web**.
-4. Select the verb table tab, choose **Comma-separated values (.csv)**, and publish.
-5. Copy the published CSV URL.
-
-## Add the CSV URL to GitHub
-
-In your GitHub repository:
-
-1. Go to **Settings → Secrets and variables → Actions**.
-2. Add either:
-   - a repository secret named `SHEET_CSV_URL`, or
-   - a repository variable named `SHEET_CSV_URL`.
-3. Paste your published CSV URL as the value.
-
-## Deploy on GitHub Pages
-
-1. Push this project to a GitHub repository.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment**, choose **GitHub Actions**.
-4. Go to the **Actions** tab.
-5. Run **Build and deploy Italian verb site** manually once.
-
-After that, the workflow updates the site daily and whenever you push to `main`.
-
-## Customize the design
-
-The visual design is controlled almost entirely by:
+Replace these files in your repository:
 
 ```text
+site/index.html
 site/styles.css
+site/app.js
+scripts/build_data.py
+README.md
 ```
 
-Good things to customize:
-
-- color variables at the top of the CSS file
-- hero title/subtitle in `site/index.html`
-- suggested search chips in `site/app.js`
-
-## Important privacy note
-
-Publishing a Google Sheet to the web makes that published content publicly accessible. Do not include private notes, emails, phone numbers, or anything you would not want online.
+Then commit the changes and rerun the GitHub Action.
