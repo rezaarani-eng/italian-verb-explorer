@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Italian Verb Conjugation Explorer</title>
+  <meta name="description" content="Search Italian verbs and study 24 conjugated example sentences with English translations." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+  <div class="bg-orb orb-c"></div>
+
+  <header class="hero">
+    <nav class="topbar" aria-label="Top navigation">
+      <div class="brand">
+        <span class="brand-mark">it</span>
+        <span>Coniuga</span>
+      </div>
+      <a class="ghost-link" href="#how-it-works">How it works</a>
+    </nav>
+
+    <section class="hero-grid">
+      <div>
+        <p class="eyebrow">Italian verb study tool</p>
+        <h1>Search one verb. See every sentence, tense, and translation.</h1>
+        <p class="subtitle">
+          Type <strong>abbracciare</strong>, <strong>prevedere</strong>, or any verb from your sheet.
+          The site instantly opens 24 cards: six people across four tense/mood groups.
+        </p>
+
+        <form class="search-shell" id="searchForm">
+          <label class="sr-only" for="verbSearch">Search a verb</label>
+          <input id="verbSearch" autocomplete="off" placeholder="Try abbracciare, mentire, ricorrere…" />
+          <button type="submit">Search</button>
+        </form>
+
+        <div class="chips" id="suggestionChips" aria-label="Suggested verbs"></div>
+      </div>
+
+      <aside class="stat-panel" aria-label="Dataset summary">
+        <div class="stat">
+          <span id="verbCount">—</span>
+          <small>verbs</small>
+        </div>
+        <div class="stat">
+          <span>24</span>
+          <small>forms per verb</small>
+        </div>
+        <div class="stat">
+          <span>4</span>
+          <small>tense / mood groups</small>
+        </div>
+      </aside>
+    </section>
+  </header>
+
+  <main>
+    <section class="results-layout">
+      <aside class="match-panel">
+        <div class="panel-heading">
+          <p class="eyebrow">Matches</p>
+          <h2>Verb index</h2>
+        </div>
+        <div id="matchList" class="match-list"></div>
+      </aside>
+
+      <section id="verbPanel" class="verb-panel" aria-live="polite"></section>
+    </section>
+
+    <section id="how-it-works" class="how">
+      <p class="eyebrow">Simple architecture</p>
+      <h2>Google Sheet → Python → JSON → GitHub Pages</h2>
+      <div class="how-grid">
+        <article>
+          <span>1</span>
+          <h3>Publish your sheet</h3>
+          <p>Publish the clean verb tab as CSV so GitHub can read the latest version.</p>
+        </article>
+        <article>
+          <span>2</span>
+          <h3>Python converts it</h3>
+          <p>The build script reshapes your rows into a compact <code>verbs.json</code> file.</p>
+        </article>
+        <article>
+          <span>3</span>
+          <h3>The website searches instantly</h3>
+          <p>GitHub Pages serves the static files for free, and JavaScript handles the search UI.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made for serious Italian practice — accurate data in, beautiful study cards out.</p>
+    <p id="generatedAt"></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
